@@ -160,6 +160,7 @@ arm_lock_delay_timer (PhoshScreenSaverManager *self, gboolean active, gboolean l
 static void
 screen_saver_set_active (PhoshScreenSaverManager *self, gboolean active, gboolean lock)
 {
+return;
   if (self->active == active)
     return;
 
