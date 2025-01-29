@@ -298,6 +298,14 @@ phosh_proximity_class_init (PhoshProximityClass *klass)
       G_PARAM_CONSTRUCT_ONLY | G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   props[PROP_CALLS_MANAGER] =
+    g_param_spec_object (
+      "calls-manager",
+      "",
+      "",
+      PHOSH_TYPE_CALLS_MANAGER,
+      G_PARAM_CONSTRUCT_ONLY | G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+
+  props[PROP_NEAR] =
     g_param_spec_boolean (
       "near",
       "near",
