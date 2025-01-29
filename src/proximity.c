@@ -138,8 +138,8 @@ on_has_proximity_changed (PhoshProximity          *self,
   g_debug ("Found %s proximity sensor", has_proximity ? "a" : "no");
 
   /* If the proxy went a way we always unclaim but only claim on ongoing calls: */
-  if (!phosh_calls_manager_get_active_call_handle (self->calls_manager) && has_proximity)
-    return;
+  /* if (!phosh_calls_manager_get_active_call_handle (self->calls_manager) && has_proximity) */
+  /*   return; */
 
   phosh_proximity_claim_proximity (self, has_proximity);
 }
@@ -321,7 +321,6 @@ phosh_proximity_class_init (PhoshProximityClass *klass)
 static void
 phosh_proximity_init (PhoshProximity *self)
 {
-  phosh_proximity_claim_proximity (self, TRUE);
 }
 
 
