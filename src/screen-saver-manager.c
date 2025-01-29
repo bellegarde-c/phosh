@@ -163,7 +163,7 @@ screen_saver_set_active (PhoshScreenSaverManager *self, gboolean active, gboolea
   if (self->active == active)
     return;
 
-  g_debug ("Activating screen saver: %d, lock: %d, lock_delay: %d", active, lock,
+  g_warning ("Activating screen saver: %d, lock: %d, lock_delay: %d", active, lock,
     self->lock_delay);
 
   /* on_primary_monitor_power_mode_changed will update self->active once the power mode is set  */
@@ -330,7 +330,7 @@ handle_lock (PhoshDBusScreenSaver  *skeleton,
              GDBusMethodInvocation *invocation)
 {
   PhoshScreenSaverManager *self = PHOSH_SCREEN_SAVER_MANAGER (skeleton);
-  return TRUE;
+
   g_return_val_if_fail (PHOSH_IS_SCREEN_SAVER_MANAGER (self), FALSE);
   g_return_val_if_fail (PHOSH_IS_LOCKSCREEN_MANAGER (self->lockscreen_manager), FALSE);
 
