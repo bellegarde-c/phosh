@@ -53,7 +53,7 @@ on_proximity_claimed (PhoshSensorProxyManager *sensor_proxy_manager,
 {
   g_autoptr (GError) err = NULL;
   gboolean success;
-g_warning("gnumdk: claim");
+
   g_return_if_fail (PHOSH_IS_SENSOR_PROXY_MANAGER (sensor_proxy_manager));
 
   success = phosh_dbus_sensor_proxy_call_claim_proximity_finish (
@@ -68,7 +68,7 @@ g_warning("gnumdk: claim");
   g_return_if_fail (PHOSH_IS_PROXIMITY (self));
   g_return_if_fail (sensor_proxy_manager == self->sensor_proxy_manager);
 
-  g_debug ("Claimed proximity sensor");
+  g_warning ("Claimed proximity sensor");
   self->claimed = TRUE;
 }
 
