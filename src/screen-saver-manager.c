@@ -172,7 +172,7 @@ screen_saver_set_active (PhoshScreenSaverManager *self, gboolean active, gboolea
 
   /* Don't wait for on_primary_monitor_power_mode_changed to activate the lock delay timer in
      case that fails on the compositor side - we don't want to miss the screen lock */
-  //arm_lock_delay_timer (self, active, lock);
+  arm_lock_delay_timer (self, active, lock);
 }
 
 
@@ -820,11 +820,11 @@ on_primary_monitor_power_mode_changed (PhoshScreenSaverManager *self,
     notify_active_changed (self);
   }
 
-  if (active) {
-    arm_lock_delay_timer (self, active, self->lock_enabled);
-  } else {
-    unarm_lock_delay_timer (self, "power mode change");
-  }
+  /* if (active) { */
+  /*   arm_lock_delay_timer (self, active, self->lock_enabled); */
+  /* } else { */
+  /*   unarm_lock_delay_timer (self, "power mode change"); */
+  /* } */
 }
 
 
