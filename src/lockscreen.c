@@ -1206,7 +1206,7 @@ phosh_lockscreen_set_default_page (PhoshLockscreen *self, PhoshLockscreenPage pa
 {
   PhoshLockscreenPrivate *priv;
 
-g_warning("default: %d", page);
+g_warning("*********************************************************************default: %d", page);
   g_return_if_fail (PHOSH_IS_LOCKSCREEN (self));
   priv = phosh_lockscreen_get_instance_private (self);
   priv->default_page = page;
