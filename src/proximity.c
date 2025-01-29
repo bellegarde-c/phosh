@@ -90,7 +90,7 @@ on_proximity_released (PhoshSensorProxyManager *sensor_proxy_manager,
   if (success == FALSE) {
     if (!phosh_async_error_warn (err, "Failed to release proximity sensor")) {
       self->near = FALSE;
-      g_object_notify_by_pspec (G_OBJECT (self), props[PROP_FADER]);
+      g_object_notify_by_pspec (G_OBJECT (self), props[PROP_NEAR]);
     }
     return;
   }
@@ -166,9 +166,6 @@ on_proximity_near_changed (PhoshProximity          *self,
                            GParamSpec              *pspec,
                            PhoshSensorProxyManager *sensor)
 {
-  gboolean near;
-  PhoshShell *shell = phosh_shell_get_default ();
-
   if (!self->claimed)
     return;
 
@@ -224,6 +221,7 @@ phosh_proximity_get_property (GObject *object,
   case PROP_NEAR:
     g_value_set_boolean (value, self->near);
     break;
+  default:
     G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
     break;
   }
