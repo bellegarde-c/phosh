@@ -166,6 +166,7 @@ on_proximity_near_changed (PhoshProximity          *self,
                            GParamSpec              *pspec,
                            PhoshSensorProxyManager *sensor)
 {
+  g_warning("on_proximity_near_changed");
   if (!self->claimed)
     return;
 
