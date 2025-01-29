@@ -68,7 +68,7 @@ on_proximity_claimed (PhoshSensorProxyManager *sensor_proxy_manager,
   g_return_if_fail (PHOSH_IS_PROXIMITY (self));
   g_return_if_fail (sensor_proxy_manager == self->sensor_proxy_manager);
 
-  g_warning ("Claimed proximity sensor");
+  g_debug ("Claimed proximity sensor");
   self->claimed = TRUE;
 }
 
@@ -166,12 +166,13 @@ on_proximity_near_changed (PhoshProximity          *self,
                            GParamSpec              *pspec,
                            PhoshSensorProxyManager *sensor)
 {
-  g_warning("on_proximity_near_changed");
   if (!self->claimed)
     return;
 
   self->near = phosh_dbus_sensor_proxy_get_proximity_near (
     PHOSH_DBUS_SENSOR_PROXY (self->sensor_proxy_manager));
+
+  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_NEAR]);
 
   g_debug ("Proximity near changed: %d", self->near);
 }
