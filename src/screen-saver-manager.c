@@ -330,7 +330,7 @@ handle_lock (PhoshDBusScreenSaver  *skeleton,
              GDBusMethodInvocation *invocation)
 {
   PhoshScreenSaverManager *self = PHOSH_SCREEN_SAVER_MANAGER (skeleton);
-  return;
+  return TRUE;
   g_return_val_if_fail (PHOSH_IS_SCREEN_SAVER_MANAGER (self), FALSE);
   g_return_val_if_fail (PHOSH_IS_LOCKSCREEN_MANAGER (self->lockscreen_manager), FALSE);
 
