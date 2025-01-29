@@ -263,8 +263,8 @@ update_top_level_layer (PhoshShell *self)
 static void
 on_proximity_fader_changed (PhoshShell *self)
 {
-  update_top_level_layer (self);
-//GNUMDK
+    phosh_shell_enable_power_save (phosh_shell_get_default (),
+                                   phosh_proximity_near (priv->proximity));
 }
 
 
