@@ -264,11 +264,12 @@ static void
 on_proximity_near_changed (PhoshShell *self)
 {
   PhoshShellPrivate *priv;
-  gboolean near = phosh_proximity_near (priv->proximity);
+  gboolean near;
 
   g_warning("on_proximity_near_changed");
   priv = phosh_shell_get_instance_private (self);
 
+  near = phosh_proximity_near (priv->proximity);
   phosh_screen_saver_manager_suspend_autolock (priv->screen_saver_manager, near);
   phosh_shell_enable_power_save (phosh_shell_get_default (), near);
 }
