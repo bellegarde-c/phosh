@@ -86,6 +86,7 @@ typedef struct _PhoshScreenSaverManager
   GSettings *settings;
   gboolean lock_enabled;
   gboolean lock_delay;
+  gboolean suspend_autolock;
   guint    lock_delay_timer_id;
   int      inhibit_pwr_btn_fd;
   int      inhibit_suspend_fd;
