@@ -263,8 +263,12 @@ update_top_level_layer (PhoshShell *self)
 static void
 on_proximity_fader_changed (PhoshShell *self)
 {
-    phosh_shell_enable_power_save (phosh_shell_get_default (),
-                                   phosh_proximity_near (priv->proximity));
+  PhoshShellPrivate *priv;
+
+  priv = phosh_shell_get_instance_private (self);
+
+  phosh_shell_enable_power_save (phosh_shell_get_default (),
+                                 phosh_proximity_near (priv->proximity));
 }
 
 
