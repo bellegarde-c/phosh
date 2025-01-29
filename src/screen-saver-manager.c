@@ -1024,7 +1024,7 @@ phosh_screen_saver_manager_new (PhoshLockscreenManager *lockscreen_manager)
 }
 
 void
-phosh_screen_saver_manager_suspend_autolock (PhoshLockscreenManager *self,
+phosh_screen_saver_manager_suspend_autolock (PhoshScreenSaverManager *self,
                                              gboolean                suspend)
 {
   self->suspend_autolock = suspend;
