@@ -820,11 +820,11 @@ on_primary_monitor_power_mode_changed (PhoshScreenSaverManager *self,
     notify_active_changed (self);
   }
 
-  /* if (active) { */
-  /*   arm_lock_delay_timer (self, active, self->lock_enabled); */
-  /* } else { */
-  /*   unarm_lock_delay_timer (self, "power mode change"); */
-  /* } */
+  if (active && !self->suspend_autolock) {
+    arm_lock_delay_timer (self, active, self->lock_enabled);
+  } else {
+    unarm_lock_delay_timer (self, "power mode change");
+  }
 }
 
 
@@ -1006,6 +1006,7 @@ phosh_screen_saver_manager_init (PhoshScreenSaverManager *self)
   self->cancel = g_cancellable_new ();
   self->inhibit_suspend_fd = -1;
   self->inhibit_pwr_btn_fd = -1;
+  self->suspend_autolock = FALSE;
 
   g_action_map_add_action_entries (G_ACTION_MAP (phosh_shell_get_default ()),
                                    entries,
@@ -1020,4 +1021,11 @@ phosh_screen_saver_manager_new (PhoshLockscreenManager *lockscreen_manager)
   return g_object_new (PHOSH_TYPE_SCREEN_SAVER_MANAGER,
                        "lockscreen-manager", lockscreen_manager,
                        NULL);
+}
+
+void
+phosh_screen_saver_manager_suspend_autolock (PhoshLockscreenManager *self,
+                                             gboolean                suspend)
+{
+  self->suspend_autolock = suspend;
 }
