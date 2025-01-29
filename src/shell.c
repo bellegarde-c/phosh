@@ -261,11 +261,11 @@ update_top_level_layer (PhoshShell *self)
 
 
 static void
-on_proximity_fader_changed (PhoshShell *self)
+on_proximity_near_changed (PhoshShell *self)
 {
   PhoshShellPrivate *priv;
 
-  g_warning("on_proximity_fader_changed");
+  g_warning("on_proximity_near_changed");
   priv = phosh_shell_get_instance_private (self);
 
   phosh_shell_enable_power_save (phosh_shell_get_default (),
@@ -759,8 +759,8 @@ setup_idle_cb (PhoshShell *self)
                                            priv->calls_manager);
     phosh_monitor_manager_set_sensor_proxy_manager (priv->monitor_manager,
                                                     priv->sensor_proxy_manager);
-    g_signal_connect_swapped (priv->proximity, "notify::fader",
-                              G_CALLBACK (on_proximity_fader_changed), self);
+    g_signal_connect_swapped (priv->proximity, "notify::near",
+                              G_CALLBACK (on_proximity_near_changed), self);
     priv->ambient = phosh_ambient_new (priv->sensor_proxy_manager);
   }
 
