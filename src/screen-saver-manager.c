@@ -330,7 +330,7 @@ handle_lock (PhoshDBusScreenSaver  *skeleton,
              GDBusMethodInvocation *invocation)
 {
   PhoshScreenSaverManager *self = PHOSH_SCREEN_SAVER_MANAGER (skeleton);
-
+  return;
   g_return_val_if_fail (PHOSH_IS_SCREEN_SAVER_MANAGER (self), FALSE);
   g_return_val_if_fail (PHOSH_IS_LOCKSCREEN_MANAGER (self->lockscreen_manager), FALSE);
 
@@ -356,7 +356,7 @@ handle_set_active (PhoshDBusScreenSaver  *skeleton,
   g_return_val_if_fail (PHOSH_IS_LOCKSCREEN_MANAGER (self->lockscreen_manager), FALSE);
 
   g_debug ("DBus call SetActive: %d, lock-enabled: %d", active, self->lock_enabled);
-  screen_saver_set_active (self, active, FALSE);
+  screen_saver_set_active (self, active, self->lock_enabled);
 
   phosh_dbus_screen_saver_complete_set_active (skeleton, invocation);
 
