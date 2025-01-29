@@ -160,7 +160,7 @@ arm_lock_delay_timer (PhoshScreenSaverManager *self, gboolean active, gboolean l
 static void
 screen_saver_set_active (PhoshScreenSaverManager *self, gboolean active, gboolean lock)
 {
-return;
+
   if (self->active == active)
     return;
 
@@ -172,7 +172,7 @@ return;
 
   /* Don't wait for on_primary_monitor_power_mode_changed to activate the lock delay timer in
      case that fails on the compositor side - we don't want to miss the screen lock */
-  arm_lock_delay_timer (self, active, lock);
+  //arm_lock_delay_timer (self, active, lock);
 }
 
 
