@@ -1206,7 +1206,6 @@ phosh_lockscreen_set_default_page (PhoshLockscreen *self, PhoshLockscreenPage pa
 {
   PhoshLockscreenPrivate *priv;
 
-g_warning("*********************************************************************default: %d", page);
   g_return_if_fail (PHOSH_IS_LOCKSCREEN (self));
   priv = phosh_lockscreen_get_instance_private (self);
   priv->default_page = page;
@@ -1307,3 +1306,4 @@ phosh_lockscreen_set_unlock_status (PhoshLockscreen *self, const char *status)
 
   gtk_label_set_label (GTK_LABEL (priv->lbl_unlock_status), status);
 }
+
