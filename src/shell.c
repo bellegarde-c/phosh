@@ -265,6 +265,7 @@ on_proximity_fader_changed (PhoshShell *self)
 {
   PhoshShellPrivate *priv;
 
+  g_warning("on_proximity_fader_changed");
   priv = phosh_shell_get_instance_private (self);
 
   phosh_shell_enable_power_save (phosh_shell_get_default (),
