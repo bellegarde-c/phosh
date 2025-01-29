@@ -321,6 +321,7 @@ phosh_proximity_class_init (PhoshProximityClass *klass)
 static void
 phosh_proximity_init (PhoshProximity *self)
 {
+  phosh_proximity_claim_proximity (self, TRUE);
 }
 
 
