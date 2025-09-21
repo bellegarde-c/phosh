@@ -199,7 +199,7 @@ update_near_state (PhoshProximity          *self)
 
   g_warning ("Proximity near changed: %d", self->near);
 
-  return FALSE
+  return FALSE;
 }
 
 static void
