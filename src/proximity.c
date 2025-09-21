@@ -180,9 +180,9 @@ on_calls_manager_active_call_changed (PhoshProximity    *self,
       call = phosh_calls_manager_get_call (self->calls_manager, handle);
       if (!phosh_proximity_sensor_enabled (self)) {
         g_signal_connect_swapped (call,
-                                 "notify::state",
-                                 G_CALLBACK (on_call_state_changed),
-                                 self);
+                                  "notify::state",
+                                  G_CALLBACK (on_call_state_changed),
+                                  self);
       }
     }
   }
@@ -190,14 +190,10 @@ on_calls_manager_active_call_changed (PhoshProximity    *self,
 }
 
 static gboolean
-update_near_state (PhoshProximity          *self)
+notify_near_state (PhoshProximity *self)
 {
-  self->near = phosh_dbus_sensor_proxy_get_proximity_near (
-  PHOSH_DBUS_SENSOR_PROXY (self->sensor_proxy_manager));
 
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_NEAR]);
-
-  g_warning ("Proximity near changed: %d", self->near);
 
   return FALSE;
 }
@@ -210,9 +206,11 @@ on_proximity_near_changed (PhoshProximity          *self,
   if (!self->claimed)
     return;
 
-  g_warning ("on_proximity_near_changed");
+  self->near = phosh_dbus_sensor_proxy_get_proximity_near (
+    PHOSH_DBUS_SENSOR_PROXY (self->sensor_proxy_manager));
   g_clear_handle_id (&self->timeout_id, g_source_remove);
-  self->timeout_id = g_timeout_add (250, (GSourceFunc) update_near_state, self);
+  self->timeout_id = g_timeout_add (250, (GSourceFunc) notify_near_state, self);
+  g_debug ("Proximity near changed: %d", self->near);
 }
 
 static void
