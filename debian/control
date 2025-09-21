@@ -74,7 +74,6 @@ Depends:
  gsettings-desktop-schemas (>= 47),
  libcap2-bin,
  phoc (>= 0.45.0),
- phosh-common (= ${source:Version}),
 Recommends:
  feedbackd (>= 0.5.0),
  fonts-cantarell,
@@ -218,7 +217,6 @@ Build-Profiles: <!pkg.phosh.nolib>
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
- phosh-common (>= 0.45.0),
 Description: Pure Wayland shell for mobile devices - binding shared library
  Phosh is a graphical shell for Wayland compositors speaking the layer-surface
  protocol and aimed at mobile devices like smart phones and tablets using touch
