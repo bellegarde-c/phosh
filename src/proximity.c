@@ -189,7 +189,7 @@ on_calls_manager_active_call_changed (PhoshProximity    *self,
   /* TODO: if call is over wait until we hit the threshold */
 }
 
-static void
+static gboolean
 update_near_state (PhoshProximity          *self)
 {
   self->near = phosh_dbus_sensor_proxy_get_proximity_near (
