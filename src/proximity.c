@@ -198,6 +198,8 @@ update_near_state (PhoshProximity          *self)
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_NEAR]);
 
   g_warning ("Proximity near changed: %d", self->near);
+
+  return FALSE
 }
 
 static void
@@ -208,6 +210,7 @@ on_proximity_near_changed (PhoshProximity          *self,
   if (!self->claimed)
     return;
 
+  g_warning ("on_proximity_near_changed");
   g_clear_handle_id (&self->timeout_id, g_source_remove);
   self->timeout_id = g_timeout_add (250, (GSourceFunc) update_near_state, self);
 }
