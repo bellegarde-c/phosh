@@ -44,6 +44,7 @@ typedef struct _PhoshProximity {
   PhoshSensorProxyManager *sensor_proxy_manager;
   PhoshCallsManager *calls_manager;
   gboolean near;
+  guint timeout_id;
 
   GSettings      *settings;
 } PhoshProximity;
@@ -188,6 +189,16 @@ on_calls_manager_active_call_changed (PhoshProximity    *self,
   /* TODO: if call is over wait until we hit the threshold */
 }
 
+static void
+update_near_state (PhoshProximity          *self)
+{
+  self->near = phosh_dbus_sensor_proxy_get_proximity_near (
+  PHOSH_DBUS_SENSOR_PROXY (self->sensor_proxy_manager));
+
+  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_NEAR]);
+
+  g_warning ("Proximity near changed: %d", self->near);
+}
 
 static void
 on_proximity_near_changed (PhoshProximity          *self,
@@ -197,12 +208,9 @@ on_proximity_near_changed (PhoshProximity          *self,
   if (!self->claimed)
     return;
 
-  self->near = phosh_dbus_sensor_proxy_get_proximity_near (
-    PHOSH_DBUS_SENSOR_PROXY (self->sensor_proxy_manager));
-
-  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_NEAR]);
-
-  g_warning ("Proximity near changed: %d", self->near);
+  g_clear_handle_id (&self->timeout_id, g_source_remove);
+  self->timeout_id = g_timeout_add_seconds (1, (GSourceFunc) update_near_state, self
+    );
 }
 
 static void
@@ -304,6 +312,8 @@ phosh_proximity_dispose (GObject *object)
                                            self);
      g_clear_object (&self->calls_manager);
   }
+
+  g_clear_handle_id (&self->timeout_id, g_source_remove);
 
   g_clear_object (&self->settings);
 
