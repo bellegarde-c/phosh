@@ -177,10 +177,12 @@ on_calls_manager_active_call_changed (PhoshProximity    *self,
   } else {
     if (active) {
       call = phosh_calls_manager_get_call (self->calls_manager, handle);
-      g_signal_connect_swapped (call,
-                                "notify::state",
-                                G_CALLBACK (on_call_state_changed),
-                                self);
+      if (!phosh_proximity_sensor_enabled (self)) {
+        g_signal_connect_swapped (call,
+                                 "notify::state",
+                                 G_CALLBACK (on_call_state_changed),
+                                 self);
+      }
     }
   }
   /* TODO: if call is over wait until we hit the threshold */
