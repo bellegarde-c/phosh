@@ -209,8 +209,7 @@ on_proximity_near_changed (PhoshProximity          *self,
     return;
 
   g_clear_handle_id (&self->timeout_id, g_source_remove);
-  self->timeout_id = g_timeout_add_seconds (1, (GSourceFunc) update_near_state, self
-    );
+  self->timeout_id = g_timeout_add (250, (GSourceFunc) update_near_state, self);
 }
 
 static void
